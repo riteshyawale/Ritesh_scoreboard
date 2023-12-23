@@ -1,19 +1,220 @@
 <html>
-    <h2>Score Board Page</h2>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script>
-    $(document).ready(function () {
-        var data1=sessionStorage.getItem('team1');
-        var data2=sessionStorage.getItem('team2');
-    var array1=JSON.parse(data1);
-    var array2=JSON.parse(data2);
-    console.log(array1);
-    console.log(array2);
-    alert(data1);
-});
-</script>
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script src="scoreboard.js"></script>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+    <div class="containers">
+        <div class="row" style="margin: 10px;">
+
+            <label style="color: blue;font-size: medium;">Score Board Page </label>
+            (<span id="gteam1" style="font-size: x-small;"> </span> vs
+            <span id="gteam2" style="font-size: x-small;"></span>)
+
+
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" id="dropdowns" type="button"
+                    data-toggle="dropdown">Select Batting
+                    <span class="caret"></span></button>
+
+                <ul class="dropdown-menu">
+                    <li onclick="showimg('fteam1')"> <a href="#"> <img id="fteam1" width="20"
+                                height="15">&nbsp;&nbsp;&nbsp;<label style="cursor: pointer;" id="gteam1s"></label></a>
+                    </li>
+                    <li onclick="showimg('fteam2')"> <a href="#"><img id="fteam2" width="20"
+                                height="15">&nbsp;&nbsp;&nbsp;<label style="cursor: pointer;" id="gteam2s"></label> </a>
+                    </li>
+                </ul>
+                <img id="fflag" style="display: none;margin-left: 5px;" width="30" height="20"></a>
+                <label id="selectnames" style="font-size: small;"></label>
+
+            </div>
+
+        </div>
+        <div class="container1">
+            <div class="row" style="padding: 5px;">
+                &nbsp;&nbsp;<label id="runsadd" style="font-size: small;">100</label>&nbsp;/
+                <label id="wickets" style="font-size: small;">0</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" id="start" disabled onclick="start()" class="btn btn-primary btn-xs">START</button>
+                <button type="button" id="stop" style="display: none;" onclick="stop()" class="btn btn-secondary btn-xs">STOP</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label id="over" style="font-size: small;">5.2</label>
+                (&nbsp;<label id="allovers" style="font-size: small;"></label>&nbsp;)&nbsp;
+                <div class="col-6">
+                    <table style="width: auto;">
+                        <tr>
+                            <th style="text-align: left;">Batting</th>
+                            <th> C </th>
+                            <th>&nbsp; Runs </th>
+                            <th> Balls </th>
+                        </tr>
+                        <tr>
+                            <td><select id="1team1" onchange="firstbatsman1()" style="width: 155px;">
+                                    <option selected disabled>Select</option>
+                                </select></td>
+                            <td style="padding-right: 6px;;" >
+                                <b id="star1" >*</b></td>
+                            <td id="run1"></td>
+                            <td id="bowl1"></td>
+                        </tr>
+                        <tr>
+                            <td><select id="1team2" onchange="firstbatsman2()"  style="width: 155px;">
+                                    <option selected disabled>Select</option>
+                                </select></td>
+                            <td style="padding-right: 6px;" >
+                                <b id="star2" style="display: none;">*</b></td>
+                                <td id="run2"></td>
+                                <td id="bowl2"></td>
+                        </tr>
+                    </table>
+                    <span id="changesba" style="font-size: x-small;"></span>
+                    <span id="changesbo" style="font-size: x-small;"></span>
+                    <table style="width: auto;">
+                        <tr>
+                            <th style="text-align: left;">Bowling</th>
+                            <th> W </th>
+                            <th> Overs </th>
+                            <th> Runs </th>
+                        </tr>
+                        <tr>
+                            <td><select id="bowlers" onchange="firstbowler()" style="width: 155px;">
+                                    <option selected disabled>Select</option>
+                                </select></td>
+                            <td id="wick1"></td>
+                            <td id="over1"></td>
+                            <td id="run1"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container2">
+            
+        </div>
+        <div style="padding: 3px;" id="bowlerip">
+
+        </div>
+        <div class="scoreb1">
+            <div class="row" style="padding: 10px;">
+                <div class="col-6">
+                    <table style="width: auto;">
+                        <tr>
+                            <th>Wide</th>
+                            <th> No Ball</th>
+                            <th> Bye</th>
+                            <th> L Bye</th>
+                            <th> Wicket</th>
+                            <th> Undo</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"><input id="wide"  type="checkbox" class="form-check-inputs"></td>
+                            <td style="text-align: center;"><input id="noball" type="checkbox" class="form-check-inputs"></td>
+                            <td style="text-align: center;"><input id="bye" type="checkbox" class="form-check-inputs"></td>
+                            <td style="text-align: center;"><input id="lb" type="checkbox" class="form-check-inputs"></td>
+                            <td style="text-align: center;"><input id="wiket" type="checkbox" class="form-check-inputs"></td>
+                            <td> <button type="button" id="undo" disabled class="btn btn-primary btn-xs">&nbsp;&nbsp; U &nbsp;&nbsp;</button></td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="col-6" style="padding-top: 14px;" id="but">
+                    <button type="button" id="zero" onclick="getrun(this)"  disabled class="btn btn-primary">0</button>
+                    <button type="button" id="one" onclick="getrun(this)" disabled class="btn btn-primary">1</button>
+                    <button type="button" id="two" onclick="getrun(this)" disabled class="btn btn-primary">2</button>
+                    <button type="button" id="three" onclick="getrun(this)" disabled class="btn btn-primary">3</button>
+                    <button type="button" id="four" onclick="getrun(this)" disabled class="btn btn-primary">4</button>
+                    <button type="button" id="five" onclick="getrun(this)" disabled class="btn btn-primary">5</button>
+                    <button type="button" id="six" onclick="getrun(this)" disabled class="btn btn-primary">6</button>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="scoreb2">
+
+
+        </div>
+
+    </div>
+</body>
 
 </html>
+<style>
+    body {
+        font-family: Arial;
+        padding: 8px;
+        font-size: medium;
+    }
+
+
+    .container1 {
+        padding: 5px 20px 5px 20px;
+        border: 2px solid lightgrey;
+        border-radius: 10px;
+    }
+
+    .container2 {
+        padding: 5px 20px 5px 20px;
+        border: 2px solid lightgrey;
+        border-radius: 10px;
+        display: none;
+    }
+
+    .scoreb1 {
+        padding: 5px 20px 5px 20px;
+        border: 2px solid lightgrey;
+        border-radius: 10px;
+    }
+
+    .scoreb2 {
+        padding: 5px 20px 5px 20px;
+        border: 2px solid lightgrey;
+        border-radius: 10px;
+        display: none;
+    }
+
+
+    select {
+        font-size: small;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        border: 1px solid #dddddd;
+        text-align: right;
+        padding: 5px;
+        font-size: small;
+    }
+
+    td {
+        border: 1px solid #dddddd;
+        text-align: right;
+        padding: 2px;
+        font-size: smaller;
+    }
+
+    .form-check-inputs {
+        height: 18px;
+        width: 25px;
+        cursor: pointer;
+    }
+</style>
+
+

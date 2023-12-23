@@ -1,173 +1,198 @@
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <div class="container">
-        
-        <div class="row" style="padding-top: 10px;">
-            <div class="col-sm-3"> 
-                <label style="padding: 8px;color: blue;font-size: large;">Selection page</label>
-            </div>
-            <div class="col-sm-3" style="display: inline-flex;"> 
-            <label style="padding: 8px;">Players:</label>
-            <input type="number" id="topplayers" style="width: 100px;" min="1" class="form-control" onchange="topoutoff()" value="11">
-            </div>
-            <div class="col-sm-3" style="display: inline-flex;"> 
-                <label style="padding: 8px;">Overs:</label>
-                <input type="number"  id="overs" style="width: 100px;" min="1"  class="form-control" onchange="oversoff()" value="10">
-            </div>
-            <div class="col-sm-3"> 
-                <button class="btn btn-success dropdown-toggle"  type="button" onclick="proceed()">Proceed</button>
-            </div>  
+    <div style="padding-top: 10px;">
+        <div>
+            <label style="padding: 6px;color: blue;font-size: larger;">Selection page</label>
+            <span>NoBall</span>&nbsp;<select id="noball"  style="width: 35px">
+                <option selected value="1">1</option>
+                <option  value="0">0</option>
+            </select>
+            <button class="btn btn-success dropdown-toggle" id="proceed" style="display: none;float: right;" type="button"
+            onclick="proceed()">Proceed</button>
         </div>
-    <div class="row">
-        <div class="col-sm-6">                    
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Team 1
-                <span class="caret"></span></button>
-                <img id="imgflag" style="display: none;padding-left: 20px;" width="50" height="22" ></a><label id="selectname" style="padding: 8px;font-size: larger;"></label>
-                <ul class="dropdown-menu">
-                    <li> <a href="#" onclick="showCartTable(IndiaCart,'aind.jpg','India')"> 
-                        <img id="india"  src= "aind.jpg" width="20" height="15" > India</a> </li>
-                    <li>   <a href="#" onclick="showCartTable(AustraliaCart,'aus.png','Australia')"> 
-                        <img id="aus" src= "aus.png" width="20" height="15"> Australia</a> </li>
-                    <li>   <a href="#" onclick="showCartTable(SouthAfricaCart,'asa.png','South Africa')"> 
-                        <img id="rsa" src=  "asa.png" width="20" height="15"> South Africa</a> </li>
-                    <li>  <a href="#" onclick="showCartTable(NewZealandCart,'anz.jpg','New Zealand')">  
-                        <img id="nz" src= "anz.jpg" width="20" height="15"> New Zealand</a> </li>
-                    <li>  <a href="#" onclick="showCartTable(TeamABDCart,'abd.jpg','Team ABD')">  
-                        <img id="abd" src= "abd.jpg" width="20" height="15"> Team ABD</a> </li>
-                    <li>  <a href="#" onclick="showCartTable(TeamSeniorCart,'asenior.jpg','Team Senior')">  
-                        <img id="senior" src= "asenior.jpg" width="20" height="15"> Team Senior</a> </li>
-                 </ul>
-              </div> 
-            <table class="table" style="width:auto;">
-                <thead>
-                    <tr>
-                        <th> PlayerId</th>
-                        <th>Player Name</th>
-                        <th> Player Details </th>
-                        <th> Action </th>
-                    </tr>
-                </thead>
-                <tbody id="cartTableBody">
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="col-sm-6">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Team 2
-                <span class="caret"></span></button>
-                <img id="imgflag1" style="display: none;padding-left: 20px;" width="50" height="22" ></a><label id="selectname1" style="padding: 8px;font-size: larger;"></label>
-                <ul class="dropdown-menu">
-                    <li> <a href="#" onclick="showCartTable1(IndiaCart,'aind.jpg','India')"> 
-                        <img id="india"  src= "aind.jpg" width="20" height="15" > India</a> </li>
-                    <li>   <a href="#" onclick="showCartTable1(AustraliaCart,'aus.png','Australia')"> 
-                        <img id="aus" src= "aus.png" width="20" height="15"> Australia</a> </li>
-                    <li>   <a href="#" onclick="showCartTable1(SouthAfricaCart,'asa.png','South Africa')"> 
-                        <img id="rsa" src=  "asa.png" width="20" height="15"> South Africa</a> </li>
-                    <li>  <a href="#" onclick="showCartTable1(NewZealandCart,'anz.jpg','New Zealand')">  
-                        <img id="nz" src= "anz.jpg" width="20" height="15"> New Zealand</a> </li>
-                    <li>  <a href="#" onclick="showCartTable1(TeamABDCart,'abd.jpg','Team ABD')">  
-                        <img id="abd" src= "abd.jpg" width="20" height="15"> Team ABD</a> </li>
-                    <li>  <a href="#" onclick="showCartTable1(TeamSeniorCart,'asenior.jpg','Team Senior')">  
-                        <img id="senior" src= "asenior.jpg" width="20" height="15"> Team Senior</a> </li>
-                 </ul>
-              </div> 
-            <table class="table" style="width:auto;">
-                <thead>
-                    <tr>
-                        <th> PlayerId</th>
-                        <th>Player Name</th>
-                        <th> Player Details </th>
-                        <th> Action </th>
-                    </tr>
-                </thead>
-                <tbody id="cartTableBody1">
-                </tbody>
-            </table>
-            
-        </div>        
+        <label >Players:</label>
+        <input type="number" id="topplayers" style="width: 50px;" min="1" value="11">
+        <label style="display: none" id="topplayersi"></label>
+        <label >Overs:</label>
+        <input type="number" id="overs" style="width: 50px;" min="1" value="10">
+        <label style="display: none" id="oversi"></label>&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-primary dropdown-toggle" id="gocheck" type="button" onclick="gocheck()">GO TO</button>
     </div>
+</div>
+<div class="row" style="padding: 5px;">
+    <div class="col-sm-6">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Team 1
+                <span class="caret"></span></button>
+            <img id="imgflag" style="display: none;padding-left: 20px;" width="50" height="22"></a><label
+                id="selectname" style="padding: 8px;font-size: larger;"></label>
+            <ul class="dropdown-menu">
+                <li> <a href="#" onclick="showCartTable(IndiaCart,'aind.jpg','India')">
+                        <img id="india" src="aind.jpg" width="20" height="15"> India</a> </li>
+                <li> <a href="#" onclick="showCartTable(AustraliaCart,'aus.png','Australia')">
+                        <img id="aus" src="aus.png" width="20" height="15"> Australia</a> </li>
+                <li> <a href="#" onclick="showCartTable(SouthAfricaCart,'asa.png','South Africa')">
+                        <img id="rsa" src="asa.png" width="20" height="15"> South Africa</a> </li>
+                <li> <a href="#" onclick="showCartTable(NewZealandCart,'anz.jpg','New Zealand')">
+                        <img id="nz" src="anz.jpg" width="20" height="15"> New Zealand</a> </li>
+                <li> <a href="#" onclick="showCartTable(TeamABDCart,'abd.jpg','Team ABD')">
+                        <img id="abd" src="abd.jpg" width="20" height="15"> Team ABD</a> </li>
+                <li> <a href="#" onclick="showCartTable(TeamSeniorCart,'asenior.jpg','Team Senior')">
+                        <img id="senior" src="asenior.jpg" width="20" height="15"> Team Senior</a> </li>
+                <li> <a href="#" onclick="showCartTable(TeamGullyCart,'gully.png','Team Gully')">
+                            <img id="senior" src="gully.png" width="20" height="15"> Team Gully</a> </li>         
+            </ul>
+        </div>
+        <table class="table" class="table1" style="width:auto;">
+            <thead>
+                <tr>
+                    <th>PID</th>
+                    <th style="display: none;"> PId</th>
+                    <th>Name</th>
+                    <th>Details</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody id="cartTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Team 2
+                <span class="caret"></span></button>
+            <img id="imgflag1" style="display: none;padding-left: 20px;" width="50" height="22"></a><label
+                id="selectname1" style="padding: 8px;font-size: larger;"></label>
+            <ul class="dropdown-menu">
+                <li> <a href="#" onclick="showCartTable1(IndiaCart,'aind.jpg','India')">
+                        <img id="india" src="aind.jpg" width="20" height="15"> India</a> </li>
+                <li> <a href="#" onclick="showCartTable1(AustraliaCart,'aus.png','Australia')">
+                        <img id="aus" src="aus.png" width="20" height="15"> Australia</a> </li>
+                <li> <a href="#" onclick="showCartTable1(SouthAfricaCart,'asa.png','South Africa')">
+                        <img id="rsa" src="asa.png" width="20" height="15"> South Africa</a> </li>
+                <li> <a href="#" onclick="showCartTable1(NewZealandCart,'anz.jpg','New Zealand')">
+                        <img id="nz" src="anz.jpg" width="20" height="15"> New Zealand</a> </li>
+                <li> <a href="#" onclick="showCartTable1(TeamABDCart,'abd.jpg','Team ABD')">
+                        <img id="abd" src="abd.jpg" width="20" height="15"> Team ABD</a> </li>
+                <li> <a href="#" onclick="showCartTable1(TeamSeniorCart,'asenior.jpg','Team Senior')">
+                        <img id="senior" src="asenior.jpg" width="20" height="15"> Team Senior</a> </li>
+                <li> <a href="#" onclick="showCartTable1(TeamGullyCart,'gully.png','Team Gully')">
+                         <img id="senior" src="gully.png" width="20" height="15"> Team Gully</a> </li>        
+            </ul>
+        </div>
+        <table class="table" class="table2" style="width:auto;">
+            <thead>
+
+                <tr>
+                    <th>PID</th>
+                    <th style="display: none;"> PId</th>
+                    <th>Name</th>
+                    <th>Details</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody id="cartTableBody1">
+            </tbody>
+        </table>
+       
+    </div>
+</div>
 </div>
 
 
 
 <script src="selection.js"></script>
 
-<link href="style.css" type="text/css" rel="stylesheet" />
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
 </html>
 <style>
-
-    .container{
-        padding: 20px;
-    }
-
     body {
         color: black;
-        font-size: 15px;
+
     }
 
-    td,tr,th {
+    td,
+    tr,
+    th {
         border: 1px solid black;
         border-collapse: collapse;
         cursor: all-scroll;
     }
 
-    .table>tbody>tr>td{
+    .table>tbody>tr>td {
         padding: 1.5px;
     }
-    .dropbtn { 
-            background-color: #4CAF50; 
-            color: white; 
-            padding: 10px; 
-            font-size: 16px; 
-            border: none; 
-            cursor: pointer; 
-            border-radius: 20px;
-            margin: 10px;
-        } 
-  
-        .dropdown { 
-            position: relative; 
-            display: inline-block; 
-            margin: 8px;
-        } 
-        #edt{
-            height: 10px;
-        }
-        .fa-edit{
-            cursor: pointer;
-        }
-        .fa-save{
-            cursor: pointer;
-        }
-  
-        .dropdown-content { 
-            display: none; 
-            position: absolute; 
-            background-color: #f9f9f9; 
-            min-width: 200px; 
-            box-shadow: 0px 8px 16px  
-                0px rgba(0, 0, 0, 0.2); 
-            z-index: 1; 
-        } 
-  
-        .dropdown-content a { 
-            color: black; 
-            padding: 5px; 
-            text-decoration: none; 
-            display: block; 
-        } 
-  
-        .dropdown-menu>li>a {
-            font-size: large;
-            padding-left: 10px;
-        }
+
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 20px;
+        margin: 10px;
+    }
+
+    .dropdown {
+        visibility: hidden;
+        position: relative;
+        display: inline-block;
+        margin: 8px;
+    }
+
+    #edt {
+        height: 10px;
+    }
+
+    .fa-edit {
+        cursor: pointer;
+    }
+
+    .fa-save {
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 5px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-menu>li>a {
+        padding-left: 10px;
+    }
+
+    input[type=checkbox],
+    input[type=radio] {
+        height: 17px;
+        width: 30px;
+        cursor: pointer;
+    }
+    .col-sm-6{
+        padding-right: 0px;
+    }
+    .pnames {
+        width: 200px;
+    }
+    .table>thead>tr>th{
+        padding: 4px;
+    }
 </style>

@@ -95,6 +95,7 @@ function startbowl(){
         $('#changesbo').css('visibility','hidden');
         $('#bowlers').attr('disabled',true);
         $('#startbowl').prop('disabled',true);
+        cartRowHTML1='';
         bowlpanel();
     }
 }
@@ -169,14 +170,18 @@ var oldwic=0;
 
 function getrun(run){
     var noballcheck=false;
+    var noballf=false;
     var extras1=0;
+    var byes=false;
+    var lbyes=false;
     $("#wide").prop('checked') ? extras1=1 : extras1=extras1 ;
-    $("#bye").prop('checked') ? extras1=extras1 : extras1=extras1;
-    $("#lb").prop('checked') ? extras1=extras1 : extras1=extras1;
+    $("#bye").prop('checked') ? byes=true : byes=false;
+    $("#lb").prop('checked') ? lbyes=true : lbyes=false;
     $("#wiket").prop('checked') ? wickets1+=1 : wickets1=wickets1;
     if($("#noball").prop('checked')){
         if(noballrun==0){noballcheck=true;}
         extras1=noballrun;
+        noballf=true;
     }
     var num=parseInt(run.textContent);
     score1+=num;
@@ -197,10 +202,11 @@ function getrun(run){
            overs1+=0.4;
         }
     }
-    forallchange(score1,wickets1,overs1,num,ext)
+
+    forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf)
 }
 
-function forallchange(score1,wickets1,overs1,num,ext){
+function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf){
     $('#runsadd').text(score1);
     $('#wickets').text(wickets1);
     $('#over').text(overs1);
@@ -209,6 +215,7 @@ function forallchange(score1,wickets1,overs1,num,ext){
     $("#bye").prop('checked', false);
     $("#lb").prop('checked', false);
     $("#wiket").prop('checked', false);
+    // new batsman
     if(firstbatsman1s==true){
         $('#run1').text(0);
         firstbatsman1s=false;
@@ -219,8 +226,17 @@ function forallchange(score1,wickets1,overs1,num,ext){
         firstbatsman2s=false;
         $('#bowl2').text(0);
     }
+    // for getting runs to a strike batsman
     if($('#star1').css('display')=='inline'){
-        $('#run1').text(parseInt($('#run1').text())+num);
+        if(byes==true){
+            $('#run1').text(parseInt($('#run1').text()));
+        }
+        else if(lbyes==true){
+            $('#run1').text(parseInt($('#run1').text()));
+        }
+        else{
+            $('#run1').text(parseInt($('#run1').text())+num);
+        }
         if(ext==false)
         $('#bowl1').text(parseInt($('#bowl1').text())+1);
         else
@@ -230,7 +246,15 @@ function forallchange(score1,wickets1,overs1,num,ext){
             $('#star1').css('display','none');
         }
     }else{
-        $('#run2').text(parseInt($('#run2').text())+num);
+        if(byes==true){
+            $('#run2').text(parseInt($('#run2').text()));
+        }
+        else if(lbyes==true){
+            $('#run2').text(parseInt($('#run2').text()));
+        }
+        else{
+            $('#run2').text(parseInt($('#run2').text())+num);
+        }
         if(ext==false)
         $('#bowl2').text(parseInt($('#bowl2').text())+1);
         else
@@ -240,16 +264,20 @@ function forallchange(score1,wickets1,overs1,num,ext){
             $('#star2').css('display','none');
         }
     }
+    // for wicket out
+    var wicketf=false;
     if(oldwic !=wickets1){
         $('#changesba').css('visibility','');
         $('#startbat').prop('disabled',false);
         $('#1team2').attr('disabled',false);
         $('#1team1').attr('disabled',false);
+        wicketf=true;
         bowlpanel();
     }else{
         $('#changesba').css('visibility','hidden');
     }
     oldwic = wickets1;
+    // for new over
     if(!(overs1.toString().includes('.')) && ext==false){
         if($('#star1').css('display')=='inline'){
             $('#star2').css('display','inline');
@@ -267,6 +295,9 @@ function forallchange(score1,wickets1,overs1,num,ext){
     else{
         $('#changesbo').css('visibility','hidden'); 
     }
+    //bowling grid create
+    createsbowlinggrid(wickets1,overs1,num,ext,byes,lbyes,noballf,wicketf)
+    // end of innings 
     if(overs1==over){
         Swal.fire({
             title: "End of Innings",
@@ -281,4 +312,19 @@ function forallchange(score1,wickets1,overs1,num,ext){
             $('#six').attr('disabled',true);
             $('#undo').attr('disabled',true);
     }
+}
+
+var cartRowHTML1 = "";
+function createsbowlinggrid(wickets1,overs1,num,ext,byes,lbyes,noballf,wicketf){
+    var variable;
+    variable=num.toString();
+    if(wicketf==true){variable+='W'}
+    if(ext==true){
+        if(noballf==true){variable+='nb'}
+        else {variable+='wd'}
+    }
+    if(byes==true){variable+='b'}
+    if(lbyes==true){variable+='lb'}   
+    cartRowHTML1 += '<button type="button" style="margin-top:4.5px;margin-bottom:4.5px;margin-left:3px;" disabled style="" class="btn btn-secondary btn-circle btn-sm">'+variable+'</button>';
+    $('#bowlinggrid').html(cartRowHTML1);
 }

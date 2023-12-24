@@ -23,7 +23,7 @@
 
 
             <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" style="padding: 4px;font-size: small;" id="dropdowns" type="button"
+                <button class="btn btn-primary dropdown-toggle" style="padding: 4px;font-size: small;margin-left: 0px;" id="dropdowns" type="button"
                     data-toggle="dropdown">Select Batting
                     <span class="caret"></span></button>
 
@@ -66,7 +66,7 @@
                                 <b id="star1" >*</b></td>
                             <td id="run1"></td>
                             <td id="bowl1"></td>
-                            <td ><button type="button" id="startbat" style="font-size: medium;" onclick="startbat()" class="btn btn-primary btn-xs">&nbsp;&nbsp;BAT&nbsp;&nbsp;</button></td>
+                            <td ><button type="button" id="startbat" style="font-size: medium;margin-left: 0px;" onclick="startbat()" class="btn btn-primary btn-xs">&nbsp;&nbsp;BAT&nbsp;&nbsp;</button></td>
                             
                         </tr>
                         <tr>
@@ -77,13 +77,13 @@
                                 <b id="star2" style="display: none;">*</b></td>
                                 <td id="run2"></td>
                                 <td id="bowl2"></td>
-                                <td ><button type="button" id="swap" style="font-size: medium;" onclick="swap()" class="btn btn-primary btn-xs">SWAP</button></td>          
+                                <td ><button type="button" id="swap" style="font-size: medium;margin-left: 0px;" onclick="swap()" class="btn btn-primary btn-xs">SWAP</button></td>          
                         </tr>
                         
                     </table>
                     
                       <span id="changesba" style="font-size: x-small;color: red;">* Select Batsman</span>
-                    <span id="changesbo" style="font-size: x-small;color: red;">* Select Bowler</span>
+                    &nbsp;<span id="changesbo" style="font-size: x-small;color: red;">* Select Bowler</span>
                     <table style="width: auto;">
                         <tr>
                             <th style="text-align: left;">Bowling</th>
@@ -98,46 +98,29 @@
                             <td id="wickb1"></td>
                             <td id="runb1"></td>
                             <td id="overb1"></td>
-                            <td ><button type="button" id="startbowl" style="font-size: medium;" onclick="startbowl()" class="btn btn-primary btn-xs">BOWL</button></td> 
+                            <td ><button type="button" id="startbowl" style="font-size: medium;margin-left: 0px;" onclick="startbowl()" class="btn btn-primary btn-xs">BOWL</button></td> 
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="container2">
-            
-        </div>
-        <div style="padding: 3px;" id="bowlerip">
-
-        </div>
+        <table style="width: auto;">
+            <div id="bowlinggrid" >
+                <label style="padding-top: 6px;visibility: hidden;">|</label>
+                
+             </div>
+        </table>
         <div class="scoreb1">
             <div class="row" style="padding: 5px;">
                 <div class="col-6">
-            <table style="width: auto;">
-                <tr>
-                    
-                </tr>
-                <tr>
-                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1</button>
-                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">2</button> 
-                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">W</button> 
-                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
-                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
-                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
-                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
-                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
-                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
-                </tr>
-            </table>
-
-                    <table style="width: auto; margin-top: 10px;">
+                    <table style="width: auto; margin-top: 7px;">
                         <tr>
-                            <th>&nbsp; WD &nbsp;</th>
-                            <th>&nbsp; NB &nbsp; </th>
-                            <th>&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;</th>
-                            <th>&nbsp; LB &nbsp;</th>
-                            <th>&nbsp;&nbsp;W&nbsp;&nbsp;&nbsp;</th>
-                            <th>&nbsp;&nbsp;Undo&nbsp;&nbsp;</th>
+                            <th>&nbsp;&nbsp; WD &nbsp; &nbsp;</th>
+                            <th>&nbsp;&nbsp; NB &nbsp;&nbsp; </th>
+                            <th>&nbsp;&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th>&nbsp;&nbsp; LB &nbsp;&nbsp;</th>
+                            <th>&nbsp;&nbsp;&nbsp;W&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th>&nbsp;&nbsp;&nbsp;Undo&nbsp;&nbsp;&nbsp;</th>
                         </tr>
                         <tr>
                             <td style="text-align: center;"><input id="wide"  type="checkbox" class="form-check-inputs"></td>
@@ -150,7 +133,7 @@
                     </table>
 
                 </div>
-                <div class="col-6" style="padding-top: 14px;" id="but">
+                <div class="col-6" style="padding-top: 17px;" id="but">
                     <button type="button" id="zero" onclick="getrun(this)"  disabled class="btn btn-primary">0</button>
                     <button type="button" id="one" onclick="getrun(this)" disabled class="btn btn-primary">1</button>
                     <button type="button" id="two" onclick="getrun(this)" disabled class="btn btn-primary">2</button>
@@ -159,16 +142,8 @@
                     <button type="button" id="five" onclick="getrun(this)" disabled class="btn btn-primary">5</button>
                     <button type="button" id="six" onclick="getrun(this)" disabled class="btn btn-primary">6</button>
                 </div>
-
-
             </div>
-
         </div>
-        <div class="scoreb2">
-
-
-        </div>
-
     </div>
 </body>
 
@@ -240,19 +215,19 @@
         cursor: pointer;
     }
 
-    .btn-circle.btn-sm { 
-            width: 25px; 
-            height: 25px; 
-            padding: 6px 0px; 
-            border-radius: 15px; 
-            font-size: 8px; 
-            text-align: center; 
-            border: 1px solid;
-            margin: 2px;
-            opacity: 1;
-            cursor: unset;
+    .btn-circle.btn-sm {
+    width: 25px;
+    height: 25px;
+    padding: 1px;
+    border-radius: 15px;
+    font-size: 10px;
+    text-align: center;
+    border: 1px solid;
+    opacity: 1;
+    cursor: unset;
+    font-weight: 700;
+    margin-bottom: 2px;
     }
-
     .btn-group-xs>.btn, .btn-xs {
     padding: 1px 5px;
     font-size: 14px;
@@ -270,6 +245,7 @@
     }
     .btn-primary{
         font-size: large;
+        margin-left: 6px;
     }
 
 </style>

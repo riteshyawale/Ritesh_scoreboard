@@ -17,13 +17,13 @@
     <div class="containers">
         <div class="row" style="margin: 10px;">
 
-            <label style="color: blue;font-size: medium;">Score Board Page </label>
+            <label style="color: 1W;font-size: medium;">Score Board Page </label>
             (<span id="gteam1" style="font-size: x-small;"> </span> vs
             <span id="gteam2" style="font-size: x-small;"></span>)
 
 
             <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" id="dropdowns" type="button"
+                <button class="btn btn-primary dropdown-toggle" style="padding: 4px;font-size: small;" id="dropdowns" type="button"
                     data-toggle="dropdown">Select Batting
                     <span class="caret"></span></button>
 
@@ -46,18 +46,17 @@
                 &nbsp;&nbsp;<label id="runsadd" style="font-size: small;">100</label>&nbsp;/
                 <label id="wickets" style="font-size: small;">0</label>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" id="start" disabled onclick="start()" class="btn btn-primary btn-xs">START</button>
-                <button type="button" id="stop" style="display: none;" onclick="stop()" class="btn btn-secondary btn-xs">STOP</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <label id="over" style="font-size: small;">5.2</label>
                 (&nbsp;<label id="allovers" style="font-size: small;"></label>&nbsp;)&nbsp;
                 <div class="col-6">
                     <table style="width: auto;">
                         <tr>
                             <th style="text-align: left;">Batting</th>
-                            <th> C </th>
-                            <th>&nbsp; Runs </th>
-                            <th> Balls </th>
+                            <th style="padding-left: 6.5px;padding-right: 6.5px;">  S  </th>
+                            <th> Runs </th>
+                            <th style="padding-left: 8px;padding-right: 8px;"> Balls </th>
                         </tr>
                         <tr>
                             <td><select id="1team1" onchange="firstbatsman1()" style="width: 155px;">
@@ -67,6 +66,8 @@
                                 <b id="star1" >*</b></td>
                             <td id="run1"></td>
                             <td id="bowl1"></td>
+                            <td ><button type="button" id="startbat" style="font-size: medium;" onclick="startbat()" class="btn btn-primary btn-xs">&nbsp;&nbsp;BAT&nbsp;&nbsp;</button></td>
+                            
                         </tr>
                         <tr>
                             <td><select id="1team2" onchange="firstbatsman2()"  style="width: 155px;">
@@ -76,24 +77,28 @@
                                 <b id="star2" style="display: none;">*</b></td>
                                 <td id="run2"></td>
                                 <td id="bowl2"></td>
+                                <td ><button type="button" id="swap" style="font-size: medium;" onclick="swap()" class="btn btn-primary btn-xs">SWAP</button></td>          
                         </tr>
+                        
                     </table>
-                    <span id="changesba" style="font-size: x-small;"></span>
-                    <span id="changesbo" style="font-size: x-small;"></span>
+                    
+                      <span id="changesba" style="font-size: x-small;color: red;">* Select Batsman</span>
+                    <span id="changesbo" style="font-size: x-small;color: red;">* Select Bowler</span>
                     <table style="width: auto;">
                         <tr>
                             <th style="text-align: left;">Bowling</th>
-                            <th> W </th>
+                            <th>W</th>
+                            <th>  Runs </th>
                             <th> Overs </th>
-                            <th> Runs </th>
                         </tr>
                         <tr>
                             <td><select id="bowlers" onchange="firstbowler()" style="width: 155px;">
                                     <option selected disabled>Select</option>
                                 </select></td>
-                            <td id="wick1"></td>
-                            <td id="over1"></td>
-                            <td id="run1"></td>
+                            <td id="wickb1"></td>
+                            <td id="runb1"></td>
+                            <td id="overb1"></td>
+                            <td ><button type="button" id="startbowl" style="font-size: medium;" onclick="startbowl()" class="btn btn-primary btn-xs">BOWL</button></td> 
                         </tr>
                     </table>
                 </div>
@@ -106,16 +111,33 @@
 
         </div>
         <div class="scoreb1">
-            <div class="row" style="padding: 10px;">
+            <div class="row" style="padding: 5px;">
                 <div class="col-6">
-                    <table style="width: auto;">
+            <table style="width: auto;">
+                <tr>
+                    
+                </tr>
+                <tr>
+                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1</button>
+                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">2</button> 
+                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">W</button> 
+                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
+                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
+                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
+                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
+                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
+                    <button type="button" disabled  class="btn btn-secondary btn-circle btn-sm">1W</button> 
+                </tr>
+            </table>
+
+                    <table style="width: auto; margin-top: 10px;">
                         <tr>
-                            <th>Wide</th>
-                            <th> No Ball</th>
-                            <th> Bye</th>
-                            <th> L Bye</th>
-                            <th> Wicket</th>
-                            <th> Undo</th>
+                            <th>&nbsp; WD &nbsp;</th>
+                            <th>&nbsp; NB &nbsp; </th>
+                            <th>&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;</th>
+                            <th>&nbsp; LB &nbsp;</th>
+                            <th>&nbsp;&nbsp;W&nbsp;&nbsp;&nbsp;</th>
+                            <th>&nbsp;&nbsp;Undo&nbsp;&nbsp;</th>
                         </tr>
                         <tr>
                             <td style="text-align: center;"><input id="wide"  type="checkbox" class="form-check-inputs"></td>
@@ -123,7 +145,7 @@
                             <td style="text-align: center;"><input id="bye" type="checkbox" class="form-check-inputs"></td>
                             <td style="text-align: center;"><input id="lb" type="checkbox" class="form-check-inputs"></td>
                             <td style="text-align: center;"><input id="wiket" type="checkbox" class="form-check-inputs"></td>
-                            <td> <button type="button" id="undo" disabled class="btn btn-primary btn-xs">&nbsp;&nbsp; U &nbsp;&nbsp;</button></td>
+                            <td> <button type="button" id="undo" disabled class="btn btn-primary btn-xs">&nbsp; U &nbsp;</button>&nbsp;</td>
                         </tr>
                     </table>
 
@@ -152,12 +174,12 @@
 
 </html>
 <style>
+
     body {
         font-family: Arial;
         padding: 8px;
         font-size: medium;
     }
-
 
     .container1 {
         padding: 5px 20px 5px 20px;
@@ -188,6 +210,7 @@
 
     select {
         font-size: small;
+        height: 25px;
     }
 
     table {
@@ -206,8 +229,9 @@
     td {
         border: 1px solid #dddddd;
         text-align: right;
-        padding: 2px;
+        padding: 3px;
         font-size: smaller;
+        height: 25px;
     }
 
     .form-check-inputs {
@@ -215,6 +239,39 @@
         width: 25px;
         cursor: pointer;
     }
+
+    .btn-circle.btn-sm { 
+            width: 25px; 
+            height: 25px; 
+            padding: 6px 0px; 
+            border-radius: 15px; 
+            font-size: 8px; 
+            text-align: center; 
+            border: 1px solid;
+            margin: 2px;
+            opacity: 1;
+            cursor: unset;
+    }
+
+    .btn-group-xs>.btn, .btn-xs {
+    padding: 1px 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 3px;
+    }
+
+    input[type=checkbox], input[type=radio] {
+    line-height: normal;
+    height: 24px;
+    }
+
+    b, strong {
+    font-size: large;
+    }
+    .btn-primary{
+        font-size: large;
+    }
+
 </style>
 
 

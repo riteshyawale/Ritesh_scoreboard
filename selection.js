@@ -125,14 +125,15 @@ function showCartTable(itemlists, string, name) {
     var cartRowHTML = "";
     for (var i = 0; i < itemlist.length; i++) {
         cartRowHTML += "<tr draggable='true' ondragstart='start()'  ondragover='dragover()'>" +
-            "<td ><input type='checkbox' onclick='checkfunction(this)'></input></td>" +
+        '<td ><i class="fa fa-edit" onclick="editname(this)" style="font-size:20px;padding-left:7px"></i></td>' +
+        '<td style="display:none;"><i class="fa fa-save" onclick="savename(this)" style="font-size:20px;padding-left:10px;padding-top:5px"></i></td>' +
             "<td style='display: none;'>" + (i + 1) + "</td>" +
             "<td class='pnames'>" + itemlist[i].pname + "</td>" +
-            "<td style='display:none;'><input type='text'  value='" + itemlist[i].pname + "' ></td>" +
+            "<td style='display:none;width:160px'><input type='text'  style='width:160px' value='" + itemlist[i].pname + "' ></td>" +
             "<td >" + itemlist[i].pdesc + "</td>" +
-            "<td style='display:none;'><input type='text' style='width:120px' value='" + itemlist[i].pdesc + "' ></i></td>" +
-            '<td ><i class="fa fa-edit" onclick="editname(this)" style="font-size:20px;padding-left:7px"></i></td>' +
-            '<td style="display:none;"><i class="fa fa-save" onclick="savename(this)" style="font-size:20px;padding-left:20px;padding-top:5px"></i></td>' +
+            "<td style='display:none;'><input type='text' style='width:70px' value='" + itemlist[i].pdesc + "' ></i></td>" +
+            "<td ><input type='checkbox' onclick='checkfunction(this)'></input></td>" +
+
             "</tr>";
     }
     $('#cartTableBody').html(cartRowHTML);
@@ -150,14 +151,15 @@ function showCartTable1(itemlists1, string, name) {
     var cartRowHTML1 = "";
     for (var i = 0; i < itemlist1.length; i++) {
         cartRowHTML1 += "<tr draggable='true' ondragstart='start()'  ondragover='dragover()'>" +
-            "<td ><input type='checkbox' name='checks' onclick='checkfunction1(this)'></input></td>" +
+        '<td ><i class="fa fa-edit" onclick="editname(this)" style="font-size:20px;padding-left:7px"></i></td>' +
+        '<td style="display:none;"><i class="fa fa-save" onclick="savename(this)" style="font-size:20px;padding-left:10px;padding-top:5px"></i></td>' +
+        
             "<td style='display: none;'>" + (i + 1) + "</td>" +
             "<td class='pnames'>" + itemlist1[i].pname + "</td>" +
-            "<td style='display:none;'><input type='text' value='" + itemlist1[i].pname + "' ></td>" +
+            "<td style='display:none;width:160px'><input type='text'  style='width:160px' value='" + itemlist1[i].pname + "' ></td>" +
             "<td >" + itemlist1[i].pdesc + "</td>" +
-            "<td style='display:none;'><input type='text' style='width:120px' value='" + itemlist1[i].pdesc + "' ></td>" +
-            '<td ><i class="fa fa-edit" onclick="editname(this)" style="font-size:20px;padding-left:7px"></i></td>' +
-            '<td style="display:none;"><i class="fa fa-save" onclick="savename(this)" style="font-size:10px;padding-left:20px;padding-top:5px"></i></td>' +
+            "<td style='display:none;'><input type='text' style='width:70px' value='" + itemlist1[i].pdesc + "' ></td>" +
+            "<td ><input type='checkbox' name='checks' onclick='checkfunction1(this)'></input></td>" +
             "</tr>";
     }
     $('#cartTableBody1').html(cartRowHTML1);
@@ -191,19 +193,19 @@ var newitemlist1 = [];
 
 function checkfunction(e) {
         if (e.checked == false) {
-            var name = e.parentNode.nextElementSibling.childNodes[0].data
+            var name = e.closest('tr').childNodes[3].innerText
             const index = newitemlist.indexOf(name);
             newitemlist.splice(index, 1);
             
         }
         else {
-            var name = e.parentNode.nextElementSibling.childNodes[0].data
+            var name = e.closest('tr').childNodes[3].innerText
             newitemlist.push(name);
         }
     
         if(newitemlist.length>=topoutoffs){
         for (var i = 1; i <= itemlist.length; i++) {
-            var values= $('#cartTableBody > tr:nth-child('+(i)+') > td:nth-child(1) > input[type=checkbox]')[0];
+            var values= $('#cartTableBody > tr:nth-child('+(i)+') > td:nth-child(8) > input[type=checkbox]')[0];
             
                 if (values.checked==false) {
                     values.disabled=true;
@@ -212,7 +214,7 @@ function checkfunction(e) {
         }
         else{
             for (var i = 1; i <= itemlist.length; i++) {
-            var values= $('#cartTableBody > tr:nth-child('+(i)+') > td:nth-child(1) > input[type=checkbox]')[0];
+            var values= $('#cartTableBody > tr:nth-child('+(i)+') > td:nth-child(8) > input[type=checkbox]')[0];
             
                 if (values.checked==false) {
                     values.disabled=false;
@@ -223,18 +225,18 @@ function checkfunction(e) {
 
 function checkfunction1(e) {
     if (e.checked == false) {
-        var name = e.parentNode.nextElementSibling.childNodes[0].data
+        var name = e.closest('tr').childNodes[3].innerText
         const index = newitemlist1.indexOf(name);
         newitemlist1.splice(index, 1);
     }
     else {
-        var name = e.parentNode.nextElementSibling.childNodes[0].data
+        var name = e.closest('tr').childNodes[3].innerText
         newitemlist1.push(name);
     }
 
     if(newitemlist1.length>=topoutoffs){
     for (var i = 1; i <= itemlist1.length; i++) {
-        var values= $('#cartTableBody1 > tr:nth-child('+(i)+') > td:nth-child(1) > input[type=checkbox]')[0];
+        var values= $('#cartTableBody1 > tr:nth-child('+(i)+') > td:nth-child(8) > input[type=checkbox]')[0];
         
             if (values.checked==false) {
                 values.disabled=true;
@@ -243,7 +245,7 @@ function checkfunction1(e) {
     }
     else{
         for (var i = 1; i <= itemlist1.length; i++) {
-        var values= $('#cartTableBody1 > tr:nth-child('+(i)+') > td:nth-child(1) > input[type=checkbox]')[0];
+        var values= $('#cartTableBody1 > tr:nth-child('+(i)+') > td:nth-child(8) > input[type=checkbox]')[0];
         
             if (values.checked==false) {
                 values.disabled=false;
@@ -255,26 +257,30 @@ function checkfunction1(e) {
 function editname(e) {
     var data = $(e).closest('tr');
     data[0].style.backgroundColor = '#9696ff'
-    data[0].childNodes[3].style.display = '';
-    data[0].childNodes[5].style.display = '';
-    data[0].childNodes[7].style.display = '';
+    data[0].childNodes[0].style.display = 'none';
     data[0].childNodes[2].style.display = 'none';
-    data[0].childNodes[4].style.display = 'none';
-    data[0].childNodes[6].style.display = 'none';
-
+    data[0].childNodes[3].style.display = 'none';
+    data[0].childNodes[5].style.display = 'none';
+    data[0].childNodes[7].style.display = '';
+    data[0].childNodes[1].style.display = '';
+    data[0].childNodes[4].style.display = '';
+    data[0].childNodes[6].style.display = '';
+   
 }
 
 function savename(e) {
     var data = $(e).closest('tr');
     data[0].style.backgroundColor = 'white'
-    data[0].childNodes[2].style.display = '';
-    data[0].childNodes[4].style.display = '';
-    data[0].childNodes[6].style.display = '';
-    data[0].childNodes[3].style.display = 'none';
-    data[0].childNodes[5].style.display = 'none';
-    data[0].childNodes[7].style.display = 'none';
-    data[0].childNodes[4].innerHTML = data[0].childNodes[5].childNodes[0].value;
-    data[0].childNodes[2].innerHTML = data[0].childNodes[3].childNodes[0].value;
+    data[0].childNodes[0].style.display = '';
+    data[0].childNodes[2].style.display = 'none';
+    data[0].childNodes[3].style.display = '';
+    data[0].childNodes[5].style.display = '';
+    data[0].childNodes[7].style.display = '';
+    data[0].childNodes[1].style.display = 'none';
+    data[0].childNodes[4].style.display = 'none';
+    data[0].childNodes[6].style.display = 'none';
+    data[0].childNodes[3].innerHTML = data[0].childNodes[4].childNodes[0].value;
+    data[0].childNodes[5].innerHTML = data[0].childNodes[6].childNodes[0].value;
 }
 
 var row;
@@ -302,8 +308,8 @@ function proceed() {
         newnamelist1=[];
             for(var j=0;j<newitemlist.length;j++){
                 let myobj1={};
-                var num=parseInt(newitemlist[j]);
-                var name=$('#cartTableBody > tr:nth-child('+(num)+') > td.pnames')[0].innerText;
+                var num=j
+                var name=$('#cartTableBody > tr:nth-child('+(num+1)+') > td.pnames')[0].innerText;
                 myobj1.ids=j;
                 myobj1.name=name;
                 newnamelist.push(myobj1);
@@ -311,8 +317,8 @@ function proceed() {
             console.log(newnamelist)
             for(var j=0;j<newitemlist1.length;j++){
                 let myobj2={};
-                var num=parseInt(newitemlist1[j]);
-                var name=$('#cartTableBody1 > tr:nth-child('+(num)+') > td.pnames')[0].innerText;
+                var num=j
+                var name=$('#cartTableBody1 > tr:nth-child('+(num+1)+') > td.pnames')[0].innerText;
                 myobj2.ids=j;
                 myobj2.name=name; 
                 newnamelist1.push(myobj2);

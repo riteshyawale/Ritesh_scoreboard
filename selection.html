@@ -4,26 +4,31 @@
     <div style="padding-top: 10px;">
         <div>
             <label style="padding: 6px;color: blue;font-size: larger;">Selection page</label>
-            <span>NoBall</span>&nbsp;<select id="noball"  style="width: 35px">
-                <option selected value="1">1</option>
-                <option  value="0">0</option>
-            </select>
+            
+            
             <button class="btn btn-success dropdown-toggle" id="proceed" style="display: none;float: right;" type="button"
             onclick="proceed()">Proceed</button>
         </div>
-        <label >Players:</label>
-        <input type="number" id="topplayers" style="width: 50px;" min="1" value="11">
+        <label >Players</label>&nbsp;&nbsp;&nbsp;&nbsp;<label >Overs</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>NoBall</label>&nbsp;&nbsp;&nbsp;        
+        <button class="btn btn-primary dropdown-toggle" id="gocheck" style="float: right;margin-top: 15px;" type="button" onclick="gocheck()">GO TO</button>
+        <br/>
+        
+        <input type="number" class="form-control" id="topplayers" style="width: 50px;padding: 4px;height: 25px;" min="1" value="11">
         <label style="display: none" id="topplayersi"></label>
-        <label >Overs:</label>
-        <input type="number" id="overs" style="width: 50px;" min="1" value="10">
-        <label style="display: none" id="oversi"></label>&nbsp;&nbsp;&nbsp;
-        <button class="btn btn-primary dropdown-toggle" id="gocheck" type="button" onclick="gocheck()">GO TO</button>
+        &nbsp;
+        <input type="number" class="form-control" id="overs" style="width: 50px;padding: 4px;height: 25px;" min="1" value="10">
+        &nbsp;
+        <select class="form-control" id="noball"  style="width: 50px;padding: 4px;height: 25px;">
+            <option selected value="1">1</option>
+            <option  value="0">0</option>
+        </select>
+        <label style="display: none" id="oversi"></label>
     </div>
 </div>
-<div class="row" style="padding: 5px;">
+<div class="row" style="padding-left: 10px;">
     <div class="col-sm-6">
         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Team 1
+            <button class="btn btn-primary dropdown-toggle" type="button" style="padding: 5px;" data-toggle="dropdown">Select Team 1
                 <span class="caret"></span></button>
             <img id="imgflag" style="display: none;padding-left: 20px;" width="50" height="22"></a><label
                 id="selectname" style="padding: 8px;font-size: larger;"></label>
@@ -47,11 +52,11 @@
         <table class="table" class="table1" style="width:auto;">
             <thead>
                 <tr>
-                    <th>PID</th>
+                    <th>Edit</th>
                     <th style="display: none;"> PId</th>
                     <th>Name</th>
                     <th>Details</th>
-                    <th>Edit</th>
+                    <th>PID</th>
                 </tr>
             </thead>
             <tbody id="cartTableBody">
@@ -61,7 +66,7 @@
 
     <div class="col-sm-6">
         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Team 2
+            <button class="btn btn-primary dropdown-toggle" type="button" style="padding: 5px;" data-toggle="dropdown">Select Team 2
                 <span class="caret"></span></button>
             <img id="imgflag1" style="display: none;padding-left: 20px;" width="50" height="22"></a><label
                 id="selectname1" style="padding: 8px;font-size: larger;"></label>
@@ -86,11 +91,11 @@
             <thead>
 
                 <tr>
-                    <th>PID</th>
+                    <th>Edit</th>
                     <th style="display: none;"> PId</th>
                     <th>Name</th>
                     <th>Details</th>
-                    <th>Edit</th>
+                    <th>PID</th>
                 </tr>
             </thead>
             <tbody id="cartTableBody1">
@@ -189,10 +194,12 @@
     .col-sm-6{
         padding-right: 0px;
     }
-    .pnames {
-        width: 200px;
-    }
+   
     .table>thead>tr>th{
         padding: 4px;
     }
+    .form-control {
+        display: inline;
+    }
+
 </style>

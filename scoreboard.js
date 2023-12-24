@@ -49,7 +49,6 @@ function showimg(flag){
     $('#fflags').show()
     $('#fflags').attr("src", flags);
     $('#dropdowns').prop('disabled',true);
-    $('#start').attr('disabled',false);
 
     var ddlCustomers = $("#1team1");
     for(var i=0;i<array.length;i++){
@@ -76,42 +75,73 @@ function showimg(flag){
     }
 }
 
-function start(){
-    $('#bowlers').attr('disabled',true);
-    $('#1team2').attr('disabled',true);
-    $('#1team1').attr('disabled',true);
-    $('#start').hide()
-    $('#stop').show();
-    $('#zero').attr('disabled',false);
-    $('#one').attr('disabled',false);
-    $('#two').attr('disabled',false);
-    $('#three').attr('disabled',false);
-    $('#four').attr('disabled',false);
-    $('#five').attr('disabled',false);
-    $('#six').attr('disabled',false);
-    $('#undo').attr('disabled',false);
-    $("#wide").prop('checked', false);
-    $("#noball").prop('checked', false);
-    $("#bye").prop('checked', false);
-    $("#lb").prop('checked', false);
-    $("#wiket").prop('checked', false);
+function startbat(){
+    if($('#1team1 option:selected').text()=='Select' || $('#1team2 option:selected').text()=='Select'){
+        $('#changesba').css('visibility','');
+    }else{
+        $('#changesba').css('visibility','hidden');
+        $('#1team2').attr('disabled',true);
+        $('#1team1').attr('disabled',true);
+        $('#startbat').prop('disabled',true);
+        bowlpanel();
+    }
+    
 }
 
-function stop(){
-    $('#bowlers').attr('disabled',false);
-    $('#1team2').attr('disabled',false);
-    $('#1team1').attr('disabled',false);
-    $('#stop').hide()
-    $('#start').show();
-    $('#zero').attr('disabled',true);
-    $('#one').attr('disabled',true);
-    $('#two').attr('disabled',true);
-    $('#three').attr('disabled',true);
-    $('#four').attr('disabled',true);
-    $('#five').attr('disabled',true);
-    $('#six').attr('disabled',true);
-    $('#undo').attr('disabled',true);
-    
+function startbowl(){
+    if($('#bowlers option:selected').text()=='Select' ){
+        $('#changesbo').css('visibility','');
+    }else{
+        $('#changesbo').css('visibility','hidden');
+        $('#bowlers').attr('disabled',true);
+        $('#startbowl').prop('disabled',true);
+        bowlpanel();
+    }
+}
+
+function bowlpanel(){
+    if($('#startbat').prop('disabled')==true && $('#startbowl').prop('disabled')==true ){
+        $('#zero').attr('disabled',false);
+        $('#one').attr('disabled',false);
+        $('#two').attr('disabled',false);
+        $('#three').attr('disabled',false);
+        $('#four').attr('disabled',false);
+        $('#five').attr('disabled',false);
+        $('#six').attr('disabled',false);
+        $('#undo').attr('disabled',false);
+        $("#wide").prop('checked', false);
+        $("#noball").prop('checked', false);
+        $("#bye").prop('checked', false);
+        $("#lb").prop('checked', false);
+        $("#wiket").prop('checked', false);
+    }else{
+        $('#zero').attr('disabled',true);
+        $('#one').attr('disabled',true);
+        $('#two').attr('disabled',true);
+        $('#three').attr('disabled',true);
+        $('#four').attr('disabled',true);
+        $('#five').attr('disabled',true);
+        $('#six').attr('disabled',true);
+        $('#undo').attr('disabled',true);
+        $("#wide").prop('checked', false);
+        $("#noball").prop('checked', false);
+        $("#bye").prop('checked', false);
+        $("#lb").prop('checked', false);
+        $("#wiket").prop('checked', false);
+    }
+
+
+}
+
+function swap(){
+    if($('#star1').css('display')=='inline'){
+        $('#star2').css('display','inline');
+        $('#star1').css('display','none'); 
+    } 
+    else{
+        $('#star1').css('display','inline');
+        $('#star2').css('display','none'); 
+    }
 }
 
 function firstbatsman2(){
@@ -211,11 +241,16 @@ function forallchange(score1,wickets1,overs1,num,ext){
         }
     }
     if(oldwic !=wickets1){
-        $('#changesba').text('* Select Batsman') 
-        $('#changesba').css('color','red');
+        $('#changesba').css('visibility','');
+        $('#startbat').prop('disabled',false);
+        $('#1team2').attr('disabled',false);
+        $('#1team1').attr('disabled',false);
+        bowlpanel();
+    }else{
+        $('#changesba').css('visibility','hidden');
     }
     oldwic = wickets1;
-    if(!(overs1.toString().includes('.'))){
+    if(!(overs1.toString().includes('.')) && ext==false){
         if($('#star1').css('display')=='inline'){
             $('#star2').css('display','inline');
             $('#star1').css('display','none'); 
@@ -224,8 +259,13 @@ function forallchange(score1,wickets1,overs1,num,ext){
             $('#star1').css('display','inline');
             $('#star2').css('display','none'); 
         }
-        $('#changesbo').text('* Select Bowler') 
-        $('#changesbo').css('color','red');
+        $('#changesbo').css('visibility','');
+        $('#startbowl').prop('disabled',false);
+        $('#bowlers').attr('disabled',false);
+        bowlpanel();
+    }
+    else{
+        $('#changesbo').css('visibility','hidden'); 
     }
     if(overs1==over){
         Swal.fire({

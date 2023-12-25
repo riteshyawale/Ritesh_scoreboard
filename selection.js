@@ -99,7 +99,7 @@ var TeamSeniorCart = [{ pid: 1, pname: "Charanjeet Sharma", pdesc: "R" },
 
 var TeamGullyCart = [{ pid: 1, pname: "Ritesh Yawale", pdesc: "R" },
 { pid: 2, pname: "Harsh Shirbhate", pdesc: "R" },
-{ pid: 3, pname: "Rahul Shirhate", pdesc: "R" },
+{ pid: 3, pname: "Rahul Shirbhate", pdesc: "R" },
 { pid: 4, pname: "Mayur Satpute", pdesc: "R" },
 { pid: 5, pname: "Shivam Yadav", pdesc: "R" },
 { pid: 6, pname: "Ramsingh Yadav", pdesc: "R" },
@@ -193,13 +193,13 @@ var newitemlist1 = [];
 
 function checkfunction(e) {
         if (e.checked == false) {
-            var name = e.closest('tr').childNodes[3].innerText
+            var name = e.closest('tr').childNodes[2].innerText
             const index = newitemlist.indexOf(name);
             newitemlist.splice(index, 1);
             
         }
         else {
-            var name = e.closest('tr').childNodes[3].innerText
+            var name = e.closest('tr').childNodes[2].innerText
             newitemlist.push(name);
         }
     
@@ -225,12 +225,12 @@ function checkfunction(e) {
 
 function checkfunction1(e) {
     if (e.checked == false) {
-        var name = e.closest('tr').childNodes[3].innerText
+        var name = e.closest('tr').childNodes[2].innerText
         const index = newitemlist1.indexOf(name);
         newitemlist1.splice(index, 1);
     }
     else {
-        var name = e.closest('tr').childNodes[3].innerText
+        var name = e.closest('tr').childNodes[2].innerText
         newitemlist1.push(name);
     }
 
@@ -308,8 +308,8 @@ function proceed() {
         newnamelist1=[];
             for(var j=0;j<newitemlist.length;j++){
                 let myobj1={};
-                var num=j
-                var name=$('#cartTableBody > tr:nth-child('+(num+1)+') > td.pnames')[0].innerText;
+                var num=parseInt(newitemlist[j]);
+                var name=$('#cartTableBody > tr:nth-child('+(num)+') > td.pnames')[0].innerText;
                 myobj1.ids=j;
                 myobj1.name=name;
                 newnamelist.push(myobj1);
@@ -317,8 +317,8 @@ function proceed() {
             console.log(newnamelist)
             for(var j=0;j<newitemlist1.length;j++){
                 let myobj2={};
-                var num=j
-                var name=$('#cartTableBody1 > tr:nth-child('+(num+1)+') > td.pnames')[0].innerText;
+                var num=parseInt(newitemlist1[j]);
+                var name=$('#cartTableBody1 > tr:nth-child('+(num)+') > td.pnames')[0].innerText;
                 myobj2.ids=j;
                 myobj2.name=name; 
                 newnamelist1.push(myobj2);

@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
 <script src="scoreboard.js"></script>
 
 <head>
@@ -26,6 +29,8 @@
                 <button class="btn btn-primary dropdown-toggle" style="padding: 4px;font-size: small;margin-left: 0px;" id="dropdowns" type="button"
                     data-toggle="dropdown">Select Batting
                     <span class="caret"></span></button>
+                    <button class="btn btn-primary" onclick="secondinn()" style="padding: 4px;font-size: small;margin-left: 0px;display: none;" id="second" type="button">Second Innings
+                    </button>
 
                 <ul class="dropdown-menu">
                     <li onclick="showimg('fteam1')"> <a href="#"> <img id="fteam1" width="20"
@@ -35,20 +40,20 @@
                                 height="15">&nbsp;&nbsp;&nbsp;<label style="cursor: pointer;" id="gteam2s"></label> </a>
                     </li>
                 </ul>
-                <img id="fflag" style="display: none;margin-left: 5px;" width="30" height="20"></a>
-                <label id="selectnames" style="font-size: small;"></label>
+                <img id="fflag" style="display: none;margin-left: 15px;" width="30" height="20"></a>
+                <label id="selectnames" style="font-size: medium;margin-left: 5px;"></label>
 
             </div>
 
         </div>
         <div class="container1">
             <div class="row" style="padding: 5px;">
-                &nbsp;&nbsp;<label id="runsadd" style="font-size: small;">100</label>&nbsp;/
+                &nbsp;&nbsp;<label id="runsadd" style="font-size: small;"></label>&nbsp;/
                 <label id="wickets" style="font-size: small;">0</label>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label id="over" style="font-size: small;">5.2</label>
+                <label id="over" style="font-size: small;"></label>
                 (&nbsp;<label id="allovers" style="font-size: small;"></label>&nbsp;)&nbsp;
                 <div class="col-6">
                     <table style="width: auto;">
@@ -66,7 +71,7 @@
                                 <b id="star1" >*</b></td>
                             <td id="run1"></td>
                             <td id="bowl1"></td>
-                            <td ><button type="button" id="startbat" style="font-size: medium;margin-left: 0px;" onclick="startbat()" class="btn btn-primary btn-xs">&nbsp;&nbsp;BAT&nbsp;&nbsp;</button></td>
+                            <td ><button type="button" id="swap" style="font-size: medium;margin-left: 0px;" onclick="swap()" class="btn btn-secondary btn-xs">SWAP</button></td> 
                             
                         </tr>
                         <tr>
@@ -77,7 +82,8 @@
                                 <b id="star2" style="display: none;">*</b></td>
                                 <td id="run2"></td>
                                 <td id="bowl2"></td>
-                                <td ><button type="button" id="swap" style="font-size: medium;margin-left: 0px;" onclick="swap()" class="btn btn-primary btn-xs">SWAP</button></td>          
+                                <td ><button type="button" id="startbat" style="font-size: medium;margin-left: 0px;" onclick="startbat()" class="btn btn-primary btn-xs">&nbsp;&nbsp;BAT&nbsp;&nbsp;</button></td>
+           
                         </tr>
                         
                     </table>
@@ -143,7 +149,20 @@
                     <button type="button" id="six" onclick="getrun(this)" disabled class="btn btn-primary">6</button>
                 </div>
             </div>
+            <label id="target" style="font-size: small;padding-top: 10px;"></label>
+            <button type="button" id="startnew" style="font-size: small;margin-left: 0px;display: none;" onclick="startnew()" class="btn btn-primary btn-xs">start</button>
         </div>
+        <button type="button" id="grid1" onclick="showgrid1()" style="display: none;margin-top: 10px;margin-bottom: 8px;" class="btn btn-primary btn-xs"></button>
+        <button type="button" id="grid2" onclick="showgrid2()" style="display: none;margin-top: 10px;margin-bottom: 8px;" class="btn btn-primary btn-xs"></button>
+        <br/>
+        <label  id="grid1batting" style="display: none;"></label>
+        <div id="jsGrid1batting" style="display: none;"></div>
+        <label id="grid2bowling" style="display: none;margin-top: 8px;"></label>
+        <div id="jsGrid2bowling" style="display: none;"></div>
+        <label  id="grid2batting" style="display: none;"></label>
+        <div id="jsGrid2batting" style="display: none;"></div>
+        <label id="grid1bowling" style="display: none;margin-top: 8px;"></label>
+        <div id="jsGrid1bowling" style="display: none;"></div>
     </div>
 </body>
 
@@ -180,6 +199,10 @@
         border: 2px solid lightgrey;
         border-radius: 10px;
         display: none;
+    }
+
+    .btn-secondary{
+        border: 1px solid rgb(190, 190, 190);
     }
 
 
@@ -227,6 +250,8 @@
     cursor: unset;
     font-weight: 700;
     margin-bottom: 2px;
+    width: auto;
+    min-width: 23px;
     }
     .btn-group-xs>.btn, .btn-xs {
     padding: 1px 5px;

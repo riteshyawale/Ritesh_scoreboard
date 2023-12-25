@@ -99,7 +99,7 @@ var TeamSeniorCart = [{ pid: 1, pname: "Charanjeet Sharma", pdesc: "R" },
 
 var TeamGullyCart = [{ pid: 1, pname: "Ritesh Yawale", pdesc: "R" },
 { pid: 2, pname: "Harsh Shirbhate", pdesc: "R" },
-{ pid: 3, pname: "Rahul Shirhate", pdesc: "R" },
+{ pid: 3, pname: "Rahul Shirbhate", pdesc: "R" },
 { pid: 4, pname: "Mayur Satpute", pdesc: "R" },
 { pid: 5, pname: "Shivam Yadav", pdesc: "R" },
 { pid: 6, pname: "Ramsingh Yadav", pdesc: "R" },

@@ -15,6 +15,7 @@ $(document).ready(function () {
     if(sessionStorage.getItem('baating')!=null){
         $("#second").show();
         $("#dropdowns").hide();
+        target=$(sessionStorage.getItem('target'));
     }
    
 });
@@ -45,6 +46,9 @@ var noballrun=sessionStorage.getItem('noball');
 var firstarrays;
 var secondarays;
 var st2;
+var team1bat;
+var team2bat;
+var target;
 
 function showimg(flag){
     if(flag=='fteam1'){var flags=flag1;var teams=teamname1;var array=array1;var conarray=array2;var t2=teamname2;};
@@ -64,6 +68,8 @@ function showimg(flag){
     secondarays=conarray;
     if(flags==flag1){st2='fteam2'};
     if(flags==flag2){st2='fteam1'};
+    team1bat=teams;
+    team2bat=t2;
 
     var ddlCustomers = $("#1team1");
     for(var i=0;i<array.length;i++){
@@ -92,9 +98,10 @@ function showimg(flag){
 
 function secondinn(){
     showimg(sessionStorage.getItem('baating'))
-    $('#target').text(sessionStorage.getItem('target'));
+    $('#target').text(team1bat +' need '+sessionStorage.getItem('target')+ ' runs in '+over+' overs');
     firstarrays=JSON.parse(sessionStorage.getItem('innings2battingarray'))
     secondarays=JSON.parse(sessionStorage.getItem('innings1battingarray'))
+    $("#second").attr('disabled',true);
 }
 
 var bowlflag=false;
@@ -203,6 +210,7 @@ var oldwic=0;
 var wickb1=0;
 var runb1=0;
 var overb1=0;
+var endofinnings=false;
 
 function getrun(run){
     var noballcheck=false;
@@ -341,7 +349,7 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
         $('#changesbo').css('visibility','hidden'); 
     }
     //for getting bowling figures
-    bowlingfigures(wickets1,score1,overs1,num,noballf,extras1)
+    bowlingfigures(wickets1,score1,overs1,num,noballf,extras1,wicketf)
     //bowling grid create
     createsbowlinggrid(num,ext,byes,lbyes,noballf,wicketf)
     if( $('#jsGrid1batting').css('display')=='block'){
@@ -378,9 +386,62 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
             ]
         });
     }
-   
+
+    if((sessionStorage.getItem('player')-1)==wickets1){
+        endofinnings=true;
+    }
+    if(overs1>=over){
+        endofinnings=true;
+    }
+    if(sessionStorage.getItem('baating')!=null && score1>=sessionStorage.getItem('target')){
+        endofinnings=true;
+    }
+    if(sessionStorage.getItem('baating')!=null && endofinnings==true){
+            if(score1>=sessionStorage.getItem('target') ){
+                $('#selectnames').text(team1bat+ " Won !!!");
+                $('#fflag').attr("src", flag1);
+                Swal.fire({
+                    title: team1bat+ " Won the Match",
+                    icon: "success"
+                    });
+    
+            }
+            else if(score1==(sessionStorage.getItem('target')-1) )
+            {
+                $('#selectnames').text("Match Drawn");
+                 $('#fflag').hide();
+                Swal.fire({
+                title:"Match Drawn",
+                icon: "success"
+                }); 
+            }
+            else{
+                $('#selectnames').text(team2bat+ " Won !!!");
+                $('#fflag').attr("src", flag2);
+                Swal.fire({
+                title: team2bat+ " Won the Match",
+                icon: "success"
+                }); 
+            }
+        
+        $('#1team2').attr('disabled',true)
+        $('#1team1').attr('disabled',true)
+        $("bowlers").attr('disabled',true)
+        $("#startbat").attr('disabled',true)
+        $("#startbowl").attr('disabled',true)
+        $('#second').hide();
+        $('#zero').attr('disabled',true);
+        $('#one').attr('disabled',true);
+        $('#two').attr('disabled',true);
+        $('#three').attr('disabled',true);
+        $('#four').attr('disabled',true);
+        $('#five').attr('disabled',true);
+        $('#six').attr('disabled',true);
+        $('#undo').attr('disabled',true);
+    }
+    
     // end of innings 
-    if(overs1==over){
+    if(endofinnings==true && sessionStorage.getItem('baating')==null){
         Swal.fire({
             title: "End of Innings",
             icon: "success"
@@ -394,17 +455,21 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
             $('#six').attr('disabled',true);
             $('#undo').attr('disabled',true);
             $('#startnew').show();
-            $('#target').text('Target = '+(score1+1)+ ' runs in '+over+' overs');
+            $("#startbat").attr('disabled',true)
+            $("#startbowl").attr('disabled',true)
+           
+            $('#target').text(team2bat +' need '+(score1+1)+ ' runs in '+over+' overs');
             sessionStorage.setItem('innings1battingarray',JSON.stringify(firstarrays));
             sessionStorage.setItem('innings2battingarray',JSON.stringify(secondarays));
             sessionStorage.setItem('baating',st2);
-            sessionStorage.setItem('target','Target = '+(score1+1)+ ' runs in '+over+' overs');
+            sessionStorage.setItem('target',(score1+1));
     }
+    
 }
 
-function bowlingfigures(wickets1,score1,overs1,num,noballf,extras1){
+function bowlingfigures(wickets1,score1,overs1,num,noballf,extras1,wicketf){
     var overv=parseFloat((overs1-overb1).toFixed(1));
-    updatebowler($( "#bowlers option:selected" ).text(),wickets1-wickb1,score1-runb1,overv,num,noballf,extras1)
+    updatebowler($( "#bowlers option:selected" ).text(),wickets1-wickb1,score1-runb1,overv,num,noballf,extras1,wicketf)
 }
 
 function startnew(){
@@ -437,7 +502,7 @@ function updatebatsmen(names,runs,balls){
     arrayobj.balls=balls;
 }
 
-function updatebowler(names,wicks,runs,overss,num,noballf,extras1){
+function updatebowler(names,wicks,runs,overss,num,noballf,extras1,wicketf){
     var arrayobj=secondarays.find(o => o.name == names);
     
         if(bowlinc==true){
@@ -453,7 +518,9 @@ function updatebowler(names,wicks,runs,overss,num,noballf,extras1){
         }else{
             arrayobj.bowlruns+=num
         }
-    arrayobj.wickets+=wicks;
+        if(wicketf==true)
+        arrayobj.wickets+=1;
+    else arrayobj.wickets = arrayobj.wickets;
     $('#wickb1').text(arrayobj.wickets)
     $('#runb1').text(arrayobj.bowlruns)
     $('#overb1').text(arrayobj.overs)
@@ -492,7 +559,7 @@ function showgrid1(){
     $("#grid1bowling").hide();
     $("#grid1batting").toggle();
     $("#grid2bowling").toggle();
-    $("#grid1batting").text('Battings : '+$('#grid1').text());
+    $("#grid1batting").text('Batting : '+$('#grid1').text());
     $("#grid2bowling").text('Bowling : '+$('#grid2').text());
 
 }
@@ -529,6 +596,6 @@ function showgrid2(){
     $("#grid2bowling").hide();
     $("#grid2batting").toggle();
     $("#grid1bowling").toggle();
-    $("#grid2batting").text('Battings : '+$('#grid2').text());
+    $("#grid2batting").text('Batting : '+$('#grid2').text());
     $("#grid1bowling").text('Bowling : '+$('#grid1').text());
 }

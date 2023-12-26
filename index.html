@@ -4,23 +4,19 @@
 <head>
 </head>
 
-<body >
-    <form  >
-
-        <div class="maindiv">
-            <h2 >Score Board App</h2>
-
-            Username &nbsp; <input type="text" id="user" /><br><br>
-            Password &nbsp;&nbsp; <input type="password" id="pass" /><br><br>
-            <div style="padding-right: 130px;"><a onClick="sucessCart()" id="myButton">Login</a></div>
-
-        </div>
-    </form>
-
-    <script>
-            
+<body  background="cricket.jpg">
     
-        let user = 'user';
+    <audio src="song.mp3" id="my_audio" autoplay="autoplay" loop="loop"></audio>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script type="text/javascript">
+     $(document).ready(function() {
+            document.body.addEventListener("mousemove", function () {
+            document.getElementById("my_audio").play();
+        })
+
+let user = 'user';
         let pass = '@1234'
         document.querySelector("#myButton").onclick = () => {
             let usern = document.querySelector('#user').value;
@@ -37,31 +33,49 @@
             }
 
         };
+        
+
+    });
     </script>
+        <div class="maindiv">
+            
+            <h2 >Score Board App</h2>
+
+            Username &nbsp; <input type="text" id="user" /><br><br>
+            Password &nbsp;&nbsp; <input type="password" id="pass" /><br><br>
+            <div style="padding-right: 130px;"><a onClick="sucessCart()" id="myButton">Login</a></div>
+
+        </div>
+
+
 </body>
 
 </html>
 <style>
 
-
+    body{
+        background-size: auto 750px;
+    background-repeat: no-repeat;
+    color: white;
+    font-family: math;
+    }
     .maindiv {
-        border: 3px solid;
-        position: absolute;
-        padding: 20px;
+        padding: 40px;
         font-size: large;
         border-radius: 15px;
+        padding-bottom: 400px;
     }
 
     #myButton {
-        background-color: #21c823;
-        border: #61d000 1px solid;
-        padding: 5px 10px;
-        color: #ffffff;
-        float: right;
-        text-decoration: none;
-        border-radius: 3px;
-        margin: 10px 0px;
-        cursor: pointer;
+        background-color: #33d535;
+    border: #c0ffaa 2px solid;
+    padding: 5px 15px;
+    color: #ffffff;
+    float: right;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 1px -28px;
+    cursor: pointer;
     }
 
     input[type=text],

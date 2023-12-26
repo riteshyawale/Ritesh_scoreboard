@@ -345,3 +345,7 @@ function proceed() {
 
 }
 
+function clearst(){
+    sessionStorage.clear();
+    localStorage.clear();
+}

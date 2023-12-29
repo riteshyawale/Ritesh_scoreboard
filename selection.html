@@ -9,7 +9,7 @@
             <button class="btn btn-success dropdown-toggle" id="proceed" style="display: none;float: right;" type="button"
             onclick="proceed()">Proceed</button>
         </div>
-        <label >Players</label>&nbsp;&nbsp;&nbsp;&nbsp;<label >Overs</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>NoBall</label>&nbsp;&nbsp;&nbsp;        
+        <label >Players</label>&nbsp;&nbsp;&nbsp;&nbsp;<label >Overs</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>NoBall</label>&nbsp;&nbsp;&nbsp;  <label>Lastman</label>&nbsp;&nbsp;&nbsp;       
         <button class="btn btn-primary dropdown-toggle" id="gocheck" style="float: right;margin-top: 15px;" type="button" onclick="gocheck()">GO TO</button>
         <br/>
         
@@ -21,6 +21,10 @@
         <select class="form-control" id="noball"  style="width: 50px;padding: 4px;height: 25px;">
             <option selected value="1">1</option>
             <option  value="0">0</option>
+        </select> &nbsp;
+        <select class="form-control" id="lastman"  style="width: 50px;padding: 1px;height: 25px;">
+            <option selected value="no">No</option>
+            <option  value="yes">Yes</option>
         </select>
         <label style="display: none" id="oversi"></label>
     </div>

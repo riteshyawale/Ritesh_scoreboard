@@ -17,6 +17,12 @@ $(document).ready(function () {
         $("#dropdowns").hide();
         target=$(sessionStorage.getItem('target'));
     }
+    
+    if(sessionStorage.getItem('lastman')=='No'){
+        lastman=1
+    }else{
+        lastman=0
+    }
    
 });
 
@@ -49,6 +55,7 @@ var st2;
 var team1bat;
 var team2bat;
 var target;
+var lastman
 
 function showimg(flag){
     if(flag=='fteam1'){var flags=flag1;var teams=teamname1;var array=array1;var conarray=array2;var t2=teamname2;};
@@ -113,11 +120,22 @@ function startbat(){
         $('#1team2').attr('disabled',true);
         $('#1team1').attr('disabled',true);
         $('#startbat').prop('disabled',true);
+        var oteam1=$('#1team1 option:selected').text();
+        var oteam2=$('#1team2 option:selected').text();
+        $("#1team1 option").each(function(){
+            if ($(this).text() == oteam1) {$(this).attr("disabled", "disabled");}
+            if ($(this).text() == oteam2) {$(this).attr("disabled", "disabled");}
+        });
+        $("#1team2 option").each(function(){
+            if ($(this).text() == oteam2) {$(this).attr("disabled", "disabled");}
+            if ($(this).text() == oteam1) {$(this).attr("disabled", "disabled");}
+          });
         bowlpanel();
     }
     
 }
 
+var bowl;
 function startbowl(){
     if($('#bowlers option:selected').text()=='Select' ){
         $('#changesbo').css('visibility','');
@@ -135,6 +153,13 @@ function startbowl(){
         runb1=score1;
         overb1=overs1;
         bowlflag=true;
+        bowl=$('#bowlers option:selected').text()
+        $("#bowlers option").each(function(){
+            if ($(this).text() == bowl) {
+                $(this).attr("disabled", "disabled");
+                $(this).siblings().attr("disabled", false);
+            }
+        });
         bowlpanel();
     }
 }
@@ -353,14 +378,14 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
     //bowling grid create
     createsbowlinggrid(num,ext,byes,lbyes,noballf,wicketf)
     if( $('#jsGrid1batting').css('display')=='block'){
-        $("#jsGrid1batting").jsGrid({width: "100%",height: "auto",data: firstarrays,
+        $("#jsGrid1batting").jsGrid({width: "90%",height: "auto",data: firstarrays,
             fields: [
                 { name: "name",title:"Player Name", width: 120, validate: "required" },
                 { name: "runs",title:"Runs", width: 100 },
                 { name: "balls",title:"Balls", width: 100 }
             ]
         });
-        $("#jsGrid2bowling").jsGrid({ width: "100%",height: "auto",data: secondarays,
+        $("#jsGrid2bowling").jsGrid({ width: "90%",height: "auto",data: secondarays,
             fields: [
                 { name: "name",title:"Player Name", width: 120, validate: "required" },
                 { name: "overs",title:"Overs",  width: 60 },
@@ -370,14 +395,14 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
         });
     }
     if( $('#jsGrid2batting').css('display')=='block'){
-        $("#jsGrid2batting").jsGrid({width: "100%", height: "auto",data: secondarays,
+        $("#jsGrid2batting").jsGrid({width: "90%", height: "auto",data: secondarays,
             fields: [
                 { name: "name",title:"Player Name", width: 120, validate: "required" },
                 { name: "runs",title:"Runs", width: 100 },
                 { name: "balls",title:"Balls", width: 100 }
             ]
         });
-        $("#jsGrid1bowling").jsGrid({ width: "100%",height: "auto",data: firstarrays,
+        $("#jsGrid1bowling").jsGrid({ width: "90%",height: "auto",data: firstarrays,
             fields: [
                 { name: "name",title:"Player Name", width: 120, validate: "required" },
                 { name: "overs",title:"Overs",  width: 60 },
@@ -387,7 +412,7 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
         });
     }
 
-    if((sessionStorage.getItem('player')-1)==wickets1){
+    if((sessionStorage.getItem('player')-lastman)==wickets1){
         endofinnings=true;
     }
     if(overs1>=over){
@@ -399,7 +424,7 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
     if(sessionStorage.getItem('baating')!=null && endofinnings==true){
             if(score1>=sessionStorage.getItem('target') ){
                 $('#selectnames').text(team1bat+ " Won !!!");
-                $('#fflag').attr("src", flag1);
+                $('#fflag').attr("src", flag2);
                 Swal.fire({
                     title: team1bat+ " Won the Match",
                     icon: "success"
@@ -417,7 +442,7 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
             }
             else{
                 $('#selectnames').text(team2bat+ " Won !!!");
-                $('#fflag').attr("src", flag2);
+                $('#fflag').attr("src", flag1);
                 Swal.fire({
                 title: team2bat+ " Won the Match",
                 icon: "success"
@@ -430,6 +455,14 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
         $("#startbat").attr('disabled',true)
         $("#startbowl").attr('disabled',true)
         $('#second').hide();
+        $('#zero').attr('disabled',true);
+        $('#one').attr('disabled',true);
+        $('#two').attr('disabled',true);
+        $('#three').attr('disabled',true);
+        $('#four').attr('disabled',true);
+        $('#five').attr('disabled',true);
+        $('#six').attr('disabled',true);
+        $('#undo').attr('disabled',true);
     }
     
     // end of innings 
@@ -501,6 +534,10 @@ function updatebowler(names,wicks,runs,overss,num,noballf,extras1,wicketf){
             arrayobj.overs=parseFloat((arrayobj.overs+0.1).toFixed(1));
             if(arrayobj.overs.toString().includes('.6')){
                 arrayobj.overs+=0.4;
+                bowl=$('#bowlers option:selected').text()
+                $("#bowlers option").prop("selected", function () {
+                return this.defaultSelected;
+        });
             }
         }else{
             arrayobj.overs=arrayobj.overs;
@@ -521,7 +558,7 @@ function updatebowler(names,wicks,runs,overss,num,noballf,extras1,wicketf){
 function showgrid1(){
     
     $("#jsGrid1batting").jsGrid({
-        width: "100%",
+        width: "90%",
         height: "auto",
         data: firstarrays,
  
@@ -533,7 +570,7 @@ function showgrid1(){
     });
     
     $("#jsGrid2bowling").jsGrid({
-        width: "100%",
+        width: "90%",
         height: "auto",
         data: secondarays,
         fields: [
@@ -559,7 +596,7 @@ function showgrid1(){
 function showgrid2(){
 
     $("#jsGrid2batting").jsGrid({
-        width: "100%",
+        width: "90%",
         height: "auto",
         data: secondarays,
  
@@ -570,7 +607,7 @@ function showgrid2(){
         ]
     });
     $("#jsGrid1bowling").jsGrid({
-        width: "100%",
+        width: "90%",
         height: "auto",
         data: firstarrays,
         fields: [

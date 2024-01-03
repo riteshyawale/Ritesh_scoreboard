@@ -128,7 +128,7 @@ var TeamSeniorCart = [{ pid: 1, pname: "Charanjeet Sharma", pdesc: "R BAT" },
 { pid: 29, pname: "Nishchay Kohad", pdesc: "R BAT" },
 { pid: 30, pname: "Manish Bhangale", pdesc: "R BAT" },
 { pid: 31, pname: "Angad Rakshak", pdesc: "R BAT" },
-{ pid: 32, pname: "Vipul Dhawas", pdesc: "R BAT" }]                    ];
+{ pid: 32, pname: "Vipul Dhawas", pdesc: "R BAT" }];
 
 var TeamGullyCart = [{ pid: 1, pname: "Ritesh Yawale", pdesc: "R BAT" },
 { pid: 2, pname: "Harsh Shirbhate", pdesc: "R BAT" },
@@ -144,7 +144,7 @@ var TeamGullyCart = [{ pid: 1, pname: "Ritesh Yawale", pdesc: "R BAT" },
 { pid: 12, pname: "Aman Yadav", pdesc: "R BAT" },
 { pid: 13, pname: "Chetan Likitkar", pdesc: "R BAT" },
 { pid: 14, pname: "Sagar Wankhede", pdesc: "R ALL" },
-{ pid: 15, pname: "Arnav", pdesc: "R BAT" },]
+{ pid: 15, pname: "Arnav", pdesc: "R BAT" }];
 
 // ---------------js code starts
 

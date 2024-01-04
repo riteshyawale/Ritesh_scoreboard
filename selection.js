@@ -80,7 +80,7 @@ var TeamABDCart = [{ pid: 1, pname: "Nishi Prasad", pdesc: "R ALL" },
 { pid: 14, pname: "Nishchay Kohad", pdesc: "R BAT" },
 { pid: 15, pname: "Manish Bhangale", pdesc: "R BAT" },
 { pid: 16, pname: "Angad Rakshak", pdesc: "R BAT" },
-{ pid: 17, pname: "Vipul Dhawas", pdesc: "R BAT" },                  
+{ pid: 17, pname: "Vipul Dhawas", pdesc: "R BAT" },
 { pid: 18, pname: "Charanjeet Sharma", pdesc: "R BAT" },
 { pid: 19, pname: "Pranjal Bhiwgade", pdesc: "R ALL" },
 { pid: 20, pname: "Tushar Mandal", pdesc: "R ALL" },
@@ -111,7 +111,7 @@ var TeamSeniorCart = [{ pid: 1, pname: "Charanjeet Sharma", pdesc: "R BAT" },
 { pid: 12, pname: "Amit Singh", pdesc: "R BAT" },
 { pid: 13, pname: "Ashish Salotkar", pdesc: "R BAT" },
 { pid: 14, pname: "Shubham Raut", pdesc: "R BWL" },
-{ pid: 15, pname: "Shashank", pdesc: "R BAT" }, 
+{ pid: 15, pname: "Shashank", pdesc: "R BAT" },
 { pid: 16, pname: "Nishi Prasad", pdesc: "R ALL" },
 { pid: 17, pname: "Vaibhav Patel", pdesc: "R BAT" },
 { pid: 18, pname: "Amit Singh Rajput", pdesc: "R BAT" },
@@ -144,7 +144,7 @@ var TeamGullyCart = [{ pid: 1, pname: "Ritesh Yawale", pdesc: "R BAT" },
 { pid: 12, pname: "Aman Yadav", pdesc: "R BAT" },
 { pid: 13, pname: "Chetan Likitkar", pdesc: "R BAT" },
 { pid: 14, pname: "Sagar Wankhede", pdesc: "R ALL" },
-{ pid: 15, pname: "Arnav", pdesc: "R BAT" }];
+{ pid: 15, pname: "Arnav", pdesc: "R BAT" },]
 
 // ---------------js code starts
 

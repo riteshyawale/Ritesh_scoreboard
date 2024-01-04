@@ -378,14 +378,14 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
     //bowling grid create
     createsbowlinggrid(num,ext,byes,lbyes,noballf,wicketf)
     if( $('#jsGrid1batting').css('display')=='block'){
-        $("#jsGrid1batting").jsGrid({width: "90%",height: "auto",data: firstarrays,
+        $("#jsGrid1batting").jsGrid({width: "95%",height: "auto",data: firstarrays,
             fields: [
                 { name: "name",title:"Player Name", width: 120, validate: "required" },
                 { name: "runs",title:"Runs", width: 100 },
                 { name: "balls",title:"Balls", width: 100 }
             ]
         });
-        $("#jsGrid2bowling").jsGrid({ width: "90%",height: "auto",data: secondarays,
+        $("#jsGrid2bowling").jsGrid({ width: "95%",height: "auto",data: secondarays,
             fields: [
                 { name: "name",title:"Player Name", width: 120, validate: "required" },
                 { name: "overs",title:"Overs",  width: 60 },
@@ -395,14 +395,14 @@ function forallchange(score1,wickets1,overs1,num,ext,byes,lbyes,noballf,extras1)
         });
     }
     if( $('#jsGrid2batting').css('display')=='block'){
-        $("#jsGrid2batting").jsGrid({width: "90%", height: "auto",data: secondarays,
+        $("#jsGrid2batting").jsGrid({width: "95%", height: "auto",data: secondarays,
             fields: [
                 { name: "name",title:"Player Name", width: 120, validate: "required" },
                 { name: "runs",title:"Runs", width: 100 },
                 { name: "balls",title:"Balls", width: 100 }
             ]
         });
-        $("#jsGrid1bowling").jsGrid({ width: "90%",height: "auto",data: firstarrays,
+        $("#jsGrid1bowling").jsGrid({ width: "95%",height: "auto",data: firstarrays,
             fields: [
                 { name: "name",title:"Player Name", width: 120, validate: "required" },
                 { name: "overs",title:"Overs",  width: 60 },
@@ -558,7 +558,7 @@ function updatebowler(names,wicks,runs,overss,num,noballf,extras1,wicketf){
 function showgrid1(){
     
     $("#jsGrid1batting").jsGrid({
-        width: "90%",
+        width: "95%",
         height: "auto",
         data: firstarrays,
  
@@ -570,7 +570,7 @@ function showgrid1(){
     });
     
     $("#jsGrid2bowling").jsGrid({
-        width: "90%",
+        width: "95%",
         height: "auto",
         data: secondarays,
         fields: [
@@ -596,7 +596,7 @@ function showgrid1(){
 function showgrid2(){
 
     $("#jsGrid2batting").jsGrid({
-        width: "90%",
+        width: "95%",
         height: "auto",
         data: secondarays,
  
@@ -607,7 +607,7 @@ function showgrid2(){
         ]
     });
     $("#jsGrid1bowling").jsGrid({
-        width: "90%",
+        width: "95%",
         height: "auto",
         data: firstarrays,
         fields: [
